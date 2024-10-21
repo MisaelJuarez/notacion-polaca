@@ -24,6 +24,10 @@ class Pila {
     vacia() {
         return (!this.size()) ? true : false;
     }
+
+    proximo(){
+        return (this.vacia()) ? null : this.pila[this.top];
+    }
 }
 
 const pila = new Pila();
@@ -40,13 +44,39 @@ const validaciones = (texto) => {
     }
 }
 
+// const transformar = (arrNotacion,resultado) => {
+//     arrNotacion.map((e,i) => {
+//         if (isNaN(e)) pila.agregar(e);
+        
+//         if (!isNaN(arrNotacion[i+1])) {
+//             resultado.push(arrNotacion[i+1]);
+//             if (!pila.vacia()) resultado.push(pila.quitar()) 
+//         } 
+//     });
+//     return resultado;
+// }
+
 const transformar = (arrNotacion,resultado) => {
+    let expresion = /^[\+\-\*/]\d+$/;
+
     arrNotacion.map((e,i) => {
+        if (expresion.test([e,arrNotacion[i+1],arrNotacion[i+2]].join(''))) {
+            resultado.push('(');
+            pila.agregar(')');
+        }
+
         if (isNaN(e)) pila.agregar(e);
         
         if (!isNaN(arrNotacion[i+1])) {
             resultado.push(arrNotacion[i+1]);
-            if (!pila.vacia()) resultado.push(pila.quitar()) 
+            if (!pila.vacia()){
+                if (pila.proximo() == ')') {
+                    resultado.push(pila.quitar());
+                    resultado.push(pila.quitar());
+                } else {
+                    resultado.push(pila.quitar());
+                }
+            }  
         } 
     });
     return resultado;
