@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <title>Notacion Polaca</title>
+</head>
+<body>
+    <h1 class="text-center mt-4 text-white">Notacion polaca</h1>
+    <div class="container d-flex justify-content-center">
+        <div class="contenedor-principal mt-5 p-5">
+            <div class="form-floating mb-3 text-primary">
+                <input type="text" class="form-control" id="notacion" placeholder="">
+                <label for="notacion">Ingrese una notacion polaca</label>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button type="button" class="btn w-50 text-white mb-4" id="btn">Convertir</button>
+            </div>
+
+            <div class="d-flex flex-column fs-4">
+                <span class="text-white" id="polaca"></span>
+                <span class="text-white" id="exp"></span>
+                <span class="text-white" id="resultado"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+</html>
