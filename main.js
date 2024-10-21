@@ -28,6 +28,18 @@ class Pila {
 
 const pila = new Pila();
 
+let exp = /^[0-9+\-*/\s]+$/;
+
+const validaciones = (texto) => {
+    if (texto.length == '') {
+        return [false,'No puedes dejar el input vacio'];
+    }else if(!exp.test(texto)){  
+        return [false,'No puedes ingresar caracteres especiales'];
+    } else {
+        return [true];
+    }
+}
+
 const transformar = (arrNotacion,resultado) => {
     arrNotacion.map((e,i) => {
         if (isNaN(e)) pila.agregar(e);
@@ -40,17 +52,21 @@ const transformar = (arrNotacion,resultado) => {
     return resultado;
 }
 
-document.getElementById('btn').addEventListener('click',() => {
+document.getElementById('btn').addEventListener('click',() => { 
     let notacion = document.getElementById('notacion').value;
     let resultado = [];
     
-    let arrNotacion = notacion.split(' ');    
+    if (validaciones(notacion)[0]) {
+        let arrNotacion = notacion.split(' ');    
+        
+        resultado = transformar(arrNotacion,resultado);
+        resultado = resultado.join().replaceAll(',',' ');
     
-    resultado = transformar(arrNotacion,resultado);
-    resultado = resultado.join().replaceAll(',',' ');
-
-    document.getElementById('polaca').textContent = `Polaca: ${notacion}`; 
-    document.getElementById('exp').textContent = `Expresion: ${resultado}`; 
-    document.getElementById('resultado').textContent = `Resultado: ${eval(resultado)}`; 
-    document.getElementById('notacion').value = '';
+        document.getElementById('polaca').textContent = `Polaca: ${notacion}`; 
+        document.getElementById('exp').textContent = `Expresion: ${resultado}`; 
+        document.getElementById('resultado').textContent = `Resultado: ${eval(resultado)}`; 
+        document.getElementById('notacion').value = '';
+    } else {
+        Swal.fire({icon: "error",text: validaciones(notacion)[1]});
+    }
 });
