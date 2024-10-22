@@ -44,18 +44,6 @@ const validaciones = (texto) => {
     }
 }
 
-// const transformar = (arrNotacion,resultado) => {
-//     arrNotacion.map((e,i) => {
-//         if (isNaN(e)) pila.agregar(e);
-        
-//         if (!isNaN(arrNotacion[i+1])) {
-//             resultado.push(arrNotacion[i+1]);
-//             if (!pila.vacia()) resultado.push(pila.quitar()) 
-//         } 
-//     });
-//     return resultado;
-// }
-
 const transformar = (arrNotacion,resultado) => {
     let expresion = /^[\+\-\*/]\d+$/;
 
